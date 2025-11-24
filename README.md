@@ -26,7 +26,6 @@ sudo apt install build-essential cmake git pkg-config python3 openjdk-11-jdk cur
 2. Configure and Build the Project
    
     ```bash
-    make antlr
     mkdir build && cd build
     cmake ..
     make -j8
