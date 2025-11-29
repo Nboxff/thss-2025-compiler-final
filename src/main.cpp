@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Compiler/Compiler.h"
 
 int main(int argc, const char *argv[]) {
   if (argc < 3) {
@@ -6,6 +7,11 @@ int main(int argc, const char *argv[]) {
               << std::endl;
     return 1;
   }
-  // TODO: Implement the main function of the compiler.
-  return 0;
+  
+  sysy::Compiler compiler;
+  if (compiler.compile(argv[1], argv[2])) {
+    return 0;
+  } else {
+    return 1;
+  }
 }
