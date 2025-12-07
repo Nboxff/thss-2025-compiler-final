@@ -1,5 +1,5 @@
-#include "ASTBuilder/ASTBuilder.h"
-#include "AST/Nodes.h"
+#include "ASTBuilder.h"
+#include "Nodes.h"
 #include <antlr4-runtime.h>
 // 包含生成的 Parser 头文件（需要先运行 make antlr 生成）
 // 生成的文件位于 src/antlr/ 目录

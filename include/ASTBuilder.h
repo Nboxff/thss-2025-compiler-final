@@ -1,50 +1,11 @@
 #pragma once
 
-#include "AST/Nodes.h"
+#include "Nodes.h"
 #include <memory>
 #include <string>
-
-// 前向声明ANTLR类型
-namespace antlr4 {
-    class tree::ParseTree;
-}
-
-// 前向声明生成的ANTLR Context类
-// 注意：cpp文件中需要包含完整的 SysYParser.h 头文件
-namespace SysYParser {
-    class CompUnitContext;
-    class DeclContext;
-    class ConstDeclContext;
-    class VarDeclContext;
-    class ConstDefContext;
-    class VarDefContext;
-    class ConstInitValContext;
-    class InitValContext;
-    class FuncDefContext;
-    class FuncFParamContext;
-    class BlockContext;
-    class BlockItemContext;
-    class StmtContext;
-    class ExpContext;
-    class AddExpContext;
-    class MulExpContext;
-    class UnaryExpContext;
-    class PrimaryExpContext;
-    class LValContext;
-    class NumberContext;
-    class RelExpContext;
-    class EqExpContext;
-    class LAndExpContext;
-    class LOrExpContext;
-    class CondContext;
-    class ConstExpContext;
-}
-
-namespace antlr4 {
-    namespace tree {
-        class TerminalNode;
-    }
-}
+#include <antlr4-runtime.h>
+// 直接包含完整的 Parser 定义
+#include "SysYParser.h"
 
 namespace sysy {
 
