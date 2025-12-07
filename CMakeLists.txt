@@ -15,11 +15,12 @@ include_directories(
 
 # Generate executable files
 file(GLOB SRC_FILES
-    src/*.cpp
+    
     src/antlr/*.cpp
+    src/ir/*.cpp
 )
 
-add_executable(compiler ${SRC_FILES})
+add_executable(compiler src/main.cpp ${SRC_FILES})
 
 # Link runtime
 target_link_libraries(compiler antlr4_shared)
@@ -63,3 +64,7 @@ if(ENABLE_ASAN)
         add_compile_options(/fsanitize=address)
     endif()
 endif()
+
+# Test IR executable
+add_executable(test_ir test_ir.cpp ${SRC_FILES})
+target_link_libraries(test_ir antlr4_shared)
