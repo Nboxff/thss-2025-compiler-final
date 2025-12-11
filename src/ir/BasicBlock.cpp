@@ -14,6 +14,14 @@ BasicBlock *BasicBlock::create(const std::string &name, Function *parent) {
     return new BasicBlock(name, parent);
 }
 
+Instruction *BasicBlock::getTerminator() const {
+    if (inst_list_.empty()) {
+        return nullptr;
+    }
+    auto *last = inst_list_.back();
+    return last->isTerminator() ? last : nullptr;
+}
+
 void BasicBlock::addInstruction(Instruction *inst) {
     inst_list_.push_back(inst);
     inst->setParent(this);

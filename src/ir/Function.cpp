@@ -29,7 +29,10 @@ void Function::addBasicBlock(BasicBlock *bb) {
 std::string Function::print() const {
     std::string s = "define " + getFunctionType()->getReturnType()->print() + " @" + getName() + "(";
     for (size_t i = 0; i < arguments_.size(); ++i) {
-        s += arguments_[i]->getType()->print() + " " + arguments_[i]->print();
+        s += arguments_[i]->getType()->print();
+        if (!arguments_[i]->print().empty()) {
+            s += " " + arguments_[i]->print();
+        }
         if (i < arguments_.size() - 1)
             s += ", ";
     }
