@@ -12,6 +12,7 @@ class GlobalVariable : public User {
 public:
     GlobalVariable(std::string name, Module *m, Type *ty, bool is_const, Constant *init = nullptr);
     std::string print() const override;
+    std::string getNameStr() const override { return "@" + getName(); }
 private:
     bool is_const_;
     Constant *init_val_;

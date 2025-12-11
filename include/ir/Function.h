@@ -39,7 +39,7 @@ public:
         : Value(ty, name), parent_(parent), arg_no_(arg_no) {}
 
     std::string print() const override {
-        return "%" + name_;
+        return name_.empty() ? "" : "%" + name_;
     }
 
 private:

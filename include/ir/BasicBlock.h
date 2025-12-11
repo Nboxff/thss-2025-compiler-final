@@ -14,6 +14,7 @@ public:
     static BasicBlock *create(const std::string &name = "", Function *parent = nullptr);
 
     Function *getParent() const { return parent_; }
+    Instruction *getTerminator() const;
     std::list<Instruction *> &getInstructions() { return inst_list_; }
     
     void addInstruction(Instruction *inst);

@@ -18,23 +18,33 @@ public:
     }
 
     BinaryInst *createAdd(Value *lhs, Value *rhs) {
-        return BinaryInst::createAdd(lhs, rhs, insert_point_);
+        auto *inst = BinaryInst::createAdd(lhs, rhs, insert_point_);
+        inst->setName(getNextName());
+        return inst;
     }
 
     BinaryInst *createSub(Value *lhs, Value *rhs) {
-        return BinaryInst::createSub(lhs, rhs, insert_point_);
+        auto *inst = BinaryInst::createSub(lhs, rhs, insert_point_);
+        inst->setName(getNextName());
+        return inst;
     }
 
     BinaryInst *createMul(Value *lhs, Value *rhs) {
-        return BinaryInst::createMul(lhs, rhs, insert_point_);
+        auto *inst = BinaryInst::createMul(lhs, rhs, insert_point_);
+        inst->setName(getNextName());
+        return inst;
     }
 
     BinaryInst *createSDiv(Value *lhs, Value *rhs) {
-        return BinaryInst::createSDiv(lhs, rhs, insert_point_);
+        auto *inst = BinaryInst::createSDiv(lhs, rhs, insert_point_);
+        inst->setName(getNextName());
+        return inst;
     }
 
     BinaryInst *createSRem(Value *lhs, Value *rhs) {
-        return BinaryInst::createSRem(lhs, rhs, insert_point_);
+        auto *inst = BinaryInst::createSRem(lhs, rhs, insert_point_);
+        inst->setName(getNextName());
+        return inst;
     }
 
     ReturnInst *createRet(Value *val) {
@@ -54,11 +64,15 @@ public:
     }
 
     AllocaInst *createAlloca(Type *ty) {
-        return new AllocaInst(ty, insert_point_);
+        auto *inst = new AllocaInst(ty, insert_point_);
+        inst->setName(getNextName());
+        return inst;
     }
 
     LoadInst *createLoad(Type *ty, Value *ptr) {
-        return new LoadInst(ty, ptr, insert_point_);
+        auto *inst = new LoadInst(ty, ptr, insert_point_);
+        inst->setName(getNextName());
+        return inst;
     }
 
     StoreInst *createStore(Value *val, Value *ptr) {
@@ -66,41 +80,67 @@ public:
     }
 
     ICmpInst *createICmpEQ(Value *lhs, Value *rhs) {
-        return new ICmpInst(ICmpInst::EQ, lhs, rhs, insert_point_);
+        auto *inst = new ICmpInst(ICmpInst::EQ, lhs, rhs, insert_point_);
+        inst->setName(getNextName());
+        return inst;
     }
-    
+
     ICmpInst *createICmpNE(Value *lhs, Value *rhs) {
-        return new ICmpInst(ICmpInst::NE, lhs, rhs, insert_point_);
+        auto *inst = new ICmpInst(ICmpInst::NE, lhs, rhs, insert_point_);
+        inst->setName(getNextName());
+        return inst;
     }
 
     ICmpInst *createICmpGT(Value *lhs, Value *rhs) {
-        return new ICmpInst(ICmpInst::GT, lhs, rhs, insert_point_);
+        auto *inst = new ICmpInst(ICmpInst::GT, lhs, rhs, insert_point_);
+        inst->setName(getNextName());
+        return inst;
     }
 
     ICmpInst *createICmpGE(Value *lhs, Value *rhs) {
-        return new ICmpInst(ICmpInst::GE, lhs, rhs, insert_point_);
+        auto *inst = new ICmpInst(ICmpInst::GE, lhs, rhs, insert_point_);
+        inst->setName(getNextName());
+        return inst;
     }
 
     ICmpInst *createICmpLT(Value *lhs, Value *rhs) {
-        return new ICmpInst(ICmpInst::LT, lhs, rhs, insert_point_);
+        auto *inst = new ICmpInst(ICmpInst::LT, lhs, rhs, insert_point_);
+        inst->setName(getNextName());
+        return inst;
     }
 
     ICmpInst *createICmpLE(Value *lhs, Value *rhs) {
-        return new ICmpInst(ICmpInst::LE, lhs, rhs, insert_point_);
+        auto *inst = new ICmpInst(ICmpInst::LE, lhs, rhs, insert_point_);
+        inst->setName(getNextName());
+        return inst;
     }
 
     CallInst *createCall(Function *func, std::vector<Value *> args) {
-        return new CallInst(func, args, insert_point_);
+        auto *inst = new CallInst(func, args, insert_point_);
+        if (!inst->getType()->isVoidTy()) {
+            inst->setName(getNextName());
+        }
+        return inst;
     }
 
     ZExtInst *createZExt(Value *val, Type *ty) {
-        return new ZExtInst(val, ty, insert_point_);
+        auto *inst = new ZExtInst(val, ty, insert_point_);
+        inst->setName(getNextName());
+        return inst;
     }
 
     GetElementPtrInst *createGEP(Value *ptr, std::vector<Value *> idxs) {
-        return new GetElementPtrInst(ptr, idxs, insert_point_);
+        auto *inst = new GetElementPtrInst(ptr, idxs, insert_point_);
+        inst->setName(getNextName());
+        return inst;
     }
 
 private:
     BasicBlock *insert_point_;
+    unsigned inst_count_ = 0;  // 指令计数器
+
+    // 生成指令名称
+    std::string getNextName() {
+        return std::to_string(inst_count_++);
+    }
 };
